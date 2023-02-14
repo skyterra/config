@@ -1,0 +1,9 @@
+
+#monkey_mongo:
+db: "monkey"
+host: "mongodb://localhost:27017/monkey"
+max_pool_size: 10       # 连接池最大活跃连接数
+min_pool_size: 10       # 连接池最小活跃连接数
+timeout: 10000          # 单个操作执行的最大耗时时长，毫秒; 10s
+max_conn_idle_time: 300 # 空闲超时时间秒，超时后关闭连接
+env: "local"

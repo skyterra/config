@@ -1,0 +1,41 @@
+cur_env: local
+
+# 默认配置为dev配置
+default: &default
+  port: 9900
+  product_name: "config"
+  log_level: "debug"
+  gin_pprof: true
+
+  nacos:
+    addr: ""
+    namespace: ""
+    access_key: ""
+    secret_key: ""
+    data_id: ""
+    group: ""
+
+envs:
+ local:
+    <<: *default
+
+    monkey_mongo:
+      db: "monkey"
+      host: "mongodb://localhost:27017/monkey"
+      max_pool_size: 10       # 连接池最大活跃连接数
+      min_pool_size: 10       # 连接池最小活跃连接数
+      timeout: 10000          # 单个操作执行的最大耗时时长，毫秒; 10s
+      max_conn_idle_time: 300 # 空闲超时时间秒，超时后关闭连接
+
+    redis:
+      host: "127.0.0.1"
+      password: ""
+      port: 6379
+      max_idle: 800              # 最大空闲连接数，活跃连接关闭后，放到空闲队列中（与redis连接未断开），等待执行命令
+      idle_timeout: 300          # 空闲超时时间秒，超时后关闭连接; 0表示永不超时
+      max_active: 1000           # 最大活跃连接数，即，已经和redis建立起连接数上限，0表示不受限制
+      wait: true                 # 超出最大连接数后，是否等待，false直接返回错误
+      read_timeout: 10000        # 10秒
+      write_timeout: 0           # 不受限制
+      connect_timeout: 10000     # 10秒
+      get_connect_timeout: 10000 # 10秒
